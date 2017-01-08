@@ -522,12 +522,15 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  //var items = document.querySelectorAll('.mover'); //this is not so efficient as the next line.
+  var items = document.getElementsByClassName('mover'); //this is more efficient than the above line.
       cachedScrollTop = document.body.scrollTop; //!!!!!! Use this to cach the data!!!!!
   for (var i = 0; i < items.length; i++) {
     //var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     var phase = Math.sin((cachedScrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    //items[i].style.left = items[i].basicLeft + 100 * phase + 'px'; //better to use transform: translate https://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
+    var distance = items[i].basicLeft + 100 * phase + 'px';
+    items[i].style.transform = 'translateX(' + distance + ')';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.

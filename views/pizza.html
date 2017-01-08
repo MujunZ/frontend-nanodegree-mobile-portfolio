@@ -137,12 +137,13 @@
     </div>
     <div id="footer" class="col-md-12">Thanks for visiting! &copy; 2014 Udacity</div>
   </div>
-  <script type="text/javascript">
+  <script type="text/javascript" src="js/main.js" async></script>
+  <script type="text/javascript" async>
       // Generates the sliding pizzas when the page loads.
       document.addEventListener('DOMContentLoaded', function() {
         var cols = 8;
         var s = 256;
-        for (var i = 0; i < 200; i++) {
+        for (var i = 0; i < 20; i++) {
           var elem = document.createElement('img');
           elem.className = 'mover';
           elem.src = "images/pizza.png";
@@ -152,10 +153,8 @@
           elem.style.top = (Math.floor(i / cols) * s) + 'px';
           document.querySelector("#movingPizzas1").appendChild(elem);
         }
-        updatePositions();
       });
-  </script>
-  <script type="text/javascript" src="js/main.js" async></script>
+  </script> 
 </body>
 
 </html>
