@@ -499,12 +499,12 @@ window.performance.mark("mark_start_generating"); // collect timing data
 //   pizzasDiv.appendChild(pizzaElementGenerator(i));
 // }
 //Put the loop inside function, then only need to getElement once.
-(function addPizza () {
+function addPizza () {
   var pizzasDiv = document.getElementById("randomPizzas");
-  for (var i = 2; i < 100; i++){
+  for (var i = 2; i < 50; i++){
     pizzasDiv.appendChild(pizzaElementGenerator(i));
   }
-})();
+};
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
@@ -575,6 +575,11 @@ function updatePositions() {
 
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
+// window.addEventListener('scroll', function(){
+// 	if (document.getElementsByClassName('randomPizzaContainer').length < 50) {
+// 		addPizza();
+// 	}
+// });
 
 //!!!!!Put the following to HTML so that the cache for updatePositions() can load!!!!
 // // Generates the sliding pizzas when the page loads.

@@ -155,6 +155,11 @@
           document.querySelector("#movingPizzas1").appendChild(elem);
         }
       });
+      window.addEventListener('scroll', function(){
+        if (document.getElementsByClassName('randomPizzaContainer').length < 50) {
+          addPizza();
+        }
+      });
   </script> 
 </body>
 
