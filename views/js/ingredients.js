@@ -311,3 +311,71 @@ var selectRandomCrust = function() {
 var ingredientItemizer = function(string) {
   return "<li>" + string + "</li>";
 };
+
+// Returns a string with random pizza ingredients nested inside <li> tags
+var makeRandomPizza = function() {
+  var pizza = "";
+
+  var numberOfMeats = Math.floor((Math.random() * 4));
+  var numberOfNonMeats = Math.floor((Math.random() * 3));
+  var numberOfCheeses = Math.floor((Math.random() * 2));
+
+  for (var i = 0; i < numberOfMeats; i++) {
+    pizza = pizza + ingredientItemizer(selectRandomMeat());
+  }
+
+  for (var j = 0; j < numberOfNonMeats; j++) {
+    pizza = pizza + ingredientItemizer(selectRandomNonMeat());
+  }
+
+  for (var k = 0; k < numberOfCheeses; k++) {
+    pizza = pizza + ingredientItemizer(selectRandomCheese());
+  }
+
+  pizza = pizza + ingredientItemizer(selectRandomSauce());
+  pizza = pizza + ingredientItemizer(selectRandomCrust());
+
+  return pizza;
+};
+
+// returns a DOM element for each pizza
+var pizzaElementGenerator = function(i) {
+  var pizzaContainer,             // contains pizza title, image and list of ingredients
+      pizzaImageContainer,        // contains the pizza image
+      pizzaImage,                 // the pizza image itself
+      pizzaDescriptionContainer,  // contains the pizza title and list of ingredients
+      pizzaName,                  // the pizza name itself
+      ul;                         // the list of ingredients
+
+  pizzaContainer = document.createElement("div");
+  pizzaImageContainer = document.createElement("div");
+  pizzaImage = document.createElement("img");
+  pizzaDescriptionContainer = document.createElement("div");
+
+  pizzaContainer.classList.add("randomPizzaContainer");
+  pizzaContainer.style.width = "33.33%";
+  pizzaContainer.style.height = "325px";
+  pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
+  pizzaImageContainer.style.width="35%";
+
+  pizzaImage.src = "images/pizza.png";
+  pizzaImage.classList.add("img-responsive");
+  pizzaImageContainer.appendChild(pizzaImage);
+  pizzaContainer.appendChild(pizzaImageContainer);
+
+
+  pizzaDescriptionContainer.style.width="65%";
+
+  pizzaName = document.createElement("h4");
+  pizzaName.innerHTML = randomName();
+  pizzaDescriptionContainer.appendChild(pizzaName);
+
+  ul = document.createElement("ul");
+  ul.innerHTML = makeRandomPizza();
+  pizzaDescriptionContainer.appendChild(ul);
+  pizzaContainer.appendChild(pizzaDescriptionContainer);
+
+  
+
+  return pizzaContainer;
+};
