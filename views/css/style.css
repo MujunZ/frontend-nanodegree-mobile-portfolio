@@ -33,6 +33,7 @@ form {
   position: fixed;
   width: 256px;
   will-change:transform;
+  backface-visibility: hidden;
   z-index: -1;
 }
 
