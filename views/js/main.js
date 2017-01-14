@@ -537,30 +537,35 @@ function updatePositions() {
   //var items = document.querySelectorAll('.mover'); //this is not so efficient as the next line.
   var items = document.getElementsByClassName('mover'); //this is more efficient than the above line.
       cachedScrollTop = document.body.scrollTop; //!!!!!! Use this to cache the data!!!!!
-      var phase0 = Math.sin((cachedScrollTop/1250));
-      var phase1 = Math.sin((cachedScrollTop/1250) +1);
-      var phase2 = Math.sin((cachedScrollTop/1250) +2);
-      var phase3 = Math.sin((cachedScrollTop/1250) +3);
-      var phase4 = Math.sin((cachedScrollTop/1250) +4);
+      // var phase0 = Math.sin((cachedScrollTop/1250));
+      // var phase1 = Math.sin((cachedScrollTop/1250) +1);
+      // var phase2 = Math.sin((cachedScrollTop/1250) +2);
+      // var phase3 = Math.sin((cachedScrollTop/1250) +3);
+      // var phase4 = Math.sin((cachedScrollTop/1250) +4);
+      var phase = [Math.sin((cachedScrollTop/1250)),
+      				Math.sin((cachedScrollTop/1250) +1),
+      				Math.sin((cachedScrollTop/1250) +2),
+      				Math.sin((cachedScrollTop/1250) +3),
+      				Math.sin((cachedScrollTop/1250) +4)];
   for (var i = 0; i < items.length; i++) {
     //var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     //var phase = Math.sin((cachedScrollTop/1250) + (i % 5));
     //items[i].style.left = items[i].basicLeft + 100 * phase + 'px'; //better to use transform: translate https://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
-    if (i%5 === 0) {
-    	var distance = items[i].basicLeft + 100 * phase0 + 'px';
-    } else if(i%5 === 1){
-    	var distance = items[i].basicLeft + 100 * phase1 + 'px';
-    } else if (i%5 === 2) {
-    	var distance = items[i].basicLeft + 100 * phase2 + 'px';
-    } else if (i%5 === 3) {
-    	var distance = items[i].basicLeft + 100 * phase3 + 'px';
-    } else if (i%5 === 4){
-    	var distance = items[i].basicLeft + 100 * phase4 + 'px';
-    }
+    // if (i%5 === 0) {
+    // 	var distance = items[i].basicLeft + 100 * phase0 + 'px';
+    // } else if(i%5 === 1){
+    // 	var distance = items[i].basicLeft + 100 * phase1 + 'px';
+    // } else if (i%5 === 2) {
+    // 	var distance = items[i].basicLeft + 100 * phase2 + 'px';
+    // } else if (i%5 === 3) {
+    // 	var distance = items[i].basicLeft + 100 * phase3 + 'px';
+    // } else if (i%5 === 4){
+    // 	var distance = items[i].basicLeft + 100 * phase4 + 'px';
+    // }
 
     //var distance = items[i].basicLeft + 100 * phase + 'px';
+    var distance = items[i].basicLeft + 100 * phase[i%5] + 'px';
     items[i].style.transform = 'translateX(' + distance + ')';
-    //window.requestAnimationFrame(updatePositions);
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
