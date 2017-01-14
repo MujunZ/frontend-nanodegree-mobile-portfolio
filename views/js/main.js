@@ -531,6 +531,9 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
+	ticking = false;
+	//var currentScrollY = cachedScrollTop;
+
   frame++;
   window.performance.mark("mark_start_frame");
 
@@ -578,8 +581,24 @@ function updatePositions() {
   }
 }
 
+//try rAF tips from https://www.html5rocks.com/en/tutorials/speed/animations/
+var //cachedScrollTop = document.body.scrollTop;
+	ticking = false;
+function onScroll () {
+	//cachedScrollTop = window.scrollY;
+	requestTick();
+}
+
+function requestTick () {
+	if(!ticking){
+		requestAnimationFrame(updatePositions);
+	}
+	ticking = true;
+}
+
 // runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+//window.addEventListener('scroll', updatePositions);
+window.addEventListener('scroll', onScroll);
 // window.addEventListener('scroll', function(){
 // 	if (document.getElementsByClassName('randomPizzaContainer').length < 50) {
 // 		addPizza();
