@@ -499,7 +499,7 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-for (var i = 2; i < 100; i++) {
+for (var i = 2; i < 15; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
@@ -524,6 +524,11 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   console.log("Average scripting time to generate last 10 frames: " + sum / 10 + "ms");
 }
 
+// Reference: http://www.html5rocks.com/en/tutorials/speed/animations/
+
+var last_known_scroll_position = 0;
+var ticking = false;
+
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
@@ -531,11 +536,14 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
+      cachedScrollTop = document.body.scrollTop; //!!!!!! Use this to cache the data!!!!!
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    //var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = Math.sin((cachedScrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    //var distance = items[i].basicLeft + 100 * phase[i%5] + 'px'; // This line and the next doesn't increse the speed
+    //items[i].style.transform = 'translateX(' + distance + ')';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -548,8 +556,20 @@ function updatePositions() {
   }
 }
 
+
+
 // runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+//window.addEventListener('scroll', updatePositions);
+window.addEventListener('scroll', function(e) {
+  last_known_scroll_position = window.scrollY;
+  if (!ticking) {
+    window.requestAnimationFrame(function() {
+      updatePositions(last_known_scroll_position);
+      ticking = false;
+    });
+  }
+  ticking = true;
+});
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
