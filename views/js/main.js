@@ -481,6 +481,7 @@ var resizePizzas = function(size) {
         for(var i = 0; i < length; i++){
           randomPizzaContainer[i].style.width = "50%";
         }
+        break;
       default:
         console.log("Can't change pizza size!!!");
         break;
