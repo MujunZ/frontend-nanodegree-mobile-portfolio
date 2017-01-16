@@ -461,16 +461,26 @@ var resizePizzas = function(size) {
 
   //Rewrite changePizzaSizes entirely
   function changePizzaSizes(size) {
-    var randomPizzaContainer = document.querySelector('.randomPizzaContainer');
+    var randomPizzaContainer = document.getElementsByClassName('randomPizzaContainer');
+        length = randomPizzaContainer.length;
     switch (size) {
       case "1":
-        randomPizzaContainer.style.width = "25%";
+        //randomPizzaContainer.style.width = "25%";
+        for(var i = 0; i < length; i++){
+          randomPizzaContainer[i].style.width = "25%";
+        }
         break;
       case "2":
-        randomPizzaContainer.style.width = "33.33%";
+        //randomPizzaContainer.style.width = "33.33%";
+        for(var i = 0; i < length; i++){
+          randomPizzaContainer[i].style.width = "33.33%";
+        }
         break;
       case "3":
-        randomPizzaContainer.style.width = "50%";
+        //randomPizzaContainer.style.width = "50%";
+        for(var i = 0; i < length; i++){
+          randomPizzaContainer[i].style.width = "50%";
+        }
       default:
         console.log("Can't change pizza size!!!");
         break;
