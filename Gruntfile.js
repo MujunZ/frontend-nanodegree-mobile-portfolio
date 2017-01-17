@@ -29,15 +29,15 @@ module.exports = function(grunt) {
               engine: 'im',
               sizes: [{
                 name:'small',
-                width: 200,
-                quality: 30,
+                width: 50,
+                quality: 10,
               }]
             },
             files:[{
             expand: true,
-            src: ['*.{jpg,png}'],
-            cwd: "img/",
-            dest: 'img/reduced/'
+            src: ['*.png'],
+            cwd: "views/images/",
+            dest: "views/images/reduced/"
             }]
           },
         }

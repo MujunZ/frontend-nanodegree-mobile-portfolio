@@ -531,9 +531,9 @@ function updatePositions() {
   for (var i = 0; i < items.length; i++) {
     //var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     //var phase = Math.sin((cachedScrollTop / 1250) + (i % 5));
-    //items[i].style.left = items[i].basicLeft + 100 * phase[i%5] + 'px';
-    var distance = items[i].basicLeft + 100 * phase[i%5] + 'px'; // This line and the next doesn't increse the speed
-    items[i].style.transform = 'translateX(' + distance + ')';
+    items[i].style.left = items[i].basicLeft + 100 * phase[i%5] + 'px';
+    // var distance = items[i].basicLeft + 100 * phase[i%5] + 'px'; // This line and the next doesn't increse the speed
+    // items[i].style.transform = 'translateX(' + distance + ')'; //This line and above change the initial position, so I don't use it.
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -570,7 +570,7 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var i = 0; i < numberOfPizza; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza.png";
+    elem.src = "images/pizza-small.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
