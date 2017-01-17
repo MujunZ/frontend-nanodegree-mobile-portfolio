@@ -1,12 +1,18 @@
 ##My Page Speed
 
-![Page Speed](img/page_speed.png)
-
 ##What I did
 
+### Front Page (index.html)
 - Removed Font Size CSS sheet
 - Resized Profilepic and pizzeria
 - Put CSS to the end
+
+### Views Page (pizza.html)
+- Changed the background pizza number to fit the screen size
+- Optimized the updatePositions() phases
+- Add requireAnimationFrames when scrolling
+- Optimized the size of the background pizza pictures by grunt responsive_images
+- Minified the js and CSS files by grunt uglify and cssnano
 
 ## Website Performance Optimization portfolio project
 
